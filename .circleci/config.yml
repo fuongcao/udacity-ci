@@ -17,9 +17,10 @@ jobs:
   print_hello_world:
     docker:
       - image: cimg/node:16.10
+    working_directory: /tmp
     steps:
       - attach_workspace:
-        at: /tmp/workspace
+         at: /tmp/workspace
 
       - run: |
           if [[ 'cat /tmp/workspace/echo-output' == "hello world" ]]; then
