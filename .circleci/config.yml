@@ -22,11 +22,11 @@ jobs:
         at: /tmp/workspace
 
       - run: |
-        if [[ 'cat /tmp/workspace/echo-output' == "hello world" ]]; then
-          echo "hello world";
-        else
-          echo "Nope!"; exit 1
-        fi
+          if [[ 'cat /tmp/workspace/echo-output' == "hello world" ]]; then
+            echo "hello world";
+          else
+            echo "Nope!"; exit 1
+          fi
 
 workflows:
   # Name the workflow "welcome"
