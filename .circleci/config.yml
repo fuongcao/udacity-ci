@@ -10,8 +10,9 @@ commands:
   sayhello:
     description: "command to say hello to"
     parameters:
-      to: string
-      default: "world"
+      to: 
+        type: string
+        default: "world"
     steps:
       - run: echo Hello, << parameters.to >>
 
