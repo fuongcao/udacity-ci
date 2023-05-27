@@ -17,6 +17,12 @@ jobs:
     steps:
       - run: echo world
 
+  print_myname:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - run: echo $MY_NAME
+
 
 workflows:
   # Name the workflow "welcome"
@@ -28,3 +34,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_myname:
+          requires:
+            - print_world
