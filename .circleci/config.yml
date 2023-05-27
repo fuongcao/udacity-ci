@@ -6,10 +6,21 @@ default: &default
     - image: cimg/node:16.10
   working_directory: /tmp
 
+commands:
+  sayhello:
+    description: "command to say hello to"
+    parameters:
+      to: string
+      default: "world"
+    steps:
+      - run: echo Hello, << parameters.to >>
+
 jobs:
   save_hello_world_output:
     <<: *default
     steps:
+      - sayhello:
+        to: "Mickey"
       - run: mkdir -p workspace
       - run: echo "hello world" > workspace/echo-output
       - persist_to_workspace:
@@ -18,9 +29,7 @@ jobs:
             - echo-output
 
   print_hello_world:
-    docker:
-      - image: cimg/node:16.10
-    working_directory: /tmp
+    <<: *default
     steps:
       - attach_workspace:
          at: /tmp/workspace
