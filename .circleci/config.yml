@@ -36,12 +36,16 @@ jobs:
          at: /tmp/workspace
       - run: cat /tmp/workspace/echo-output
       - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "hello world" ]]; then
-            echo "hello world"; exit 1
+          if [[ `cat /tmp/workspace/echo-output` == "hello world1" ]]; then
+            echo "hello world";
           else
             echo "Nope!"; exit 1
           fi
-        when: on_fail
+
+      - run:
+          name: run failed
+          command: echo "run failed" 
+          when: on_fail
 
 workflows:
   # Name the workflow "welcome"
