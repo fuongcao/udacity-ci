@@ -2,7 +2,7 @@ version: 2.1
 # Use a package of configuration called an orb.
 orbs:
   # Declare a dependency on the welcome-orb
-  welcome: circleci/node@4.7
+  welcome: circleci/welcome-orb@@4.7
 
 jobs:
   print_hello:
