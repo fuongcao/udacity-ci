@@ -37,10 +37,11 @@ jobs:
       - run: cat /tmp/workspace/echo-output
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "hello world" ]]; then
-            echo "hello world";
+            echo "hello world"; exit 1
           else
             echo "Nope!"; exit 1
           fi
+        when: on_fail
 
 workflows:
   # Name the workflow "welcome"
