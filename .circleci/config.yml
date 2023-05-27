@@ -1,28 +1,32 @@
 version: 2.1
 # Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  print_hello:
+  save_hello_world_output:
+    docker:
+      - image: cimg/node:16.10
+    working_directory: /tmp
+    steps:
+      - run: mkdir -p workspace
+      - run: echo "hello world" > workspace/echo-output
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - echo-output
+
+  print_hello_world:
     docker:
       - image: cimg/node:16.10
     steps:
-      - run: echo hello
+      - attach_workspace:
+        at: /tmp/workspace
 
-  print_world:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - run: echo world
-
-  print_myname:
-    docker:
-      - image: cimg/node:16.10
-    steps:
-      - run: echo $MY_NAME
-
+      - run: |
+        if [[ 'cat /tmp/workspace/echo-output' == 'hello world']]; then
+          echo "hello world"';
+        else 
+          echo "Nope!"; exit 1
+        fi
 
 workflows:
   # Name the workflow "welcome"
@@ -31,9 +35,7 @@ workflows:
     jobs:
       - welcome/run
       - print_hello
-      - print_world:
+      - save_hello_world_output:
+      - print_hello_world:
           requires:
-            - print_hello
-      - print_myname:
-          requires:
-            - print_world
+            - save_hello_world_output
