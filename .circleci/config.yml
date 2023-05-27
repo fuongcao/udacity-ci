@@ -43,5 +43,5 @@ workflows:
   # Name the workflow "welcome"
   welcome:
     jobs:
-      - print_hello/run
-      - print_world/run
+      - print_hello
+      - print_world
