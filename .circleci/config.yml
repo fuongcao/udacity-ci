@@ -31,8 +31,6 @@ jobs:
           command: echo "hello"
 
   print_world:
-    requires: 
-      - print_hello
     docker:
       - image: cimg/node:16.10
     steps:
