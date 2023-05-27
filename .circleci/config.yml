@@ -21,7 +21,7 @@ jobs:
     steps:
       - attach_workspace:
          at: /tmp/workspace
-
+      - run: cat /tmp/workspace/echo-output
       - run: |
           if [[ 'cat /tmp/workspace/echo-output' == "hello world" ]]; then
             echo "hello world";
