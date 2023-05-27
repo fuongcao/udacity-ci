@@ -21,7 +21,7 @@ jobs:
     <<: *default
     steps:
       - sayhello:
-        to: "Mickey"
+          to: "Mickey"
       - run: mkdir -p workspace
       - run: echo "hello world" > workspace/echo-output
       - persist_to_workspace:
