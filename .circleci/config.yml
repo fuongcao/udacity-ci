@@ -1,11 +1,14 @@
 version: 2.1
 # Use a package of configuration called an orb.
 
+default: &default
+  docker:
+    - image: cimg/node:16.10
+  working_directory: /tmp
+
 jobs:
   save_hello_world_output:
-    docker:
-      - image: cimg/node:16.10
-    working_directory: /tmp
+    <<: *default
     steps:
       - run: mkdir -p workspace
       - run: echo "hello world" > workspace/echo-output
